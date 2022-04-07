@@ -2,6 +2,7 @@ package line2.line2_back4.review.model;
 
 import line2.line2_back4.restApi.models.Home;
 import line2.line2_back4.restApi.models.User;
+import line2.line2_back4.util.BaseTime;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Review {
+public class Review extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
