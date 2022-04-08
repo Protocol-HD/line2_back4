@@ -1,10 +1,13 @@
 package line2.line2_back4.review.controller;
 
-import line2.line2_back4.review.model.ReviewDtoInput;
+import line2.line2_back4.review.model.ReviewDto;
 import line2.line2_back4.review.service.ReviewService;
 import line2.line2_back4.systemMessage.SystemMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +20,7 @@ public class ReviewControllerImpl implements ReviewController {
 
     @Override
     @PostMapping("/v1/review")
-    public SystemMessage add(@RequestBody ReviewDtoInput reviewDtoInput) {
+    public SystemMessage add(@RequestBody ReviewDto reviewDtoInput) {
         try {
             log.info("ReviewController add Review({}) start", reviewDtoInput);
             return reviewService.add(reviewDtoInput);
@@ -34,7 +37,7 @@ public class ReviewControllerImpl implements ReviewController {
 
     @Override
     @PutMapping("/v1/review")
-    public SystemMessage edit(@RequestBody ReviewDtoInput reviewDtoInput) {
+    public SystemMessage edit(@RequestBody ReviewDto reviewDtoInput) {
         try {
             log.info("ReviewController edit Review({}) start", reviewDtoInput);
             return reviewService.edit(reviewDtoInput);
@@ -63,6 +66,34 @@ public class ReviewControllerImpl implements ReviewController {
                     .build();
         } finally {
             log.info("ReviewController delete by id Review end");
+        }
+    }
+
+    @Override
+    @GetMapping("/v1/review/home/{id}")
+    public List<ReviewDto> findbyHomeId(@PathVariable Long id) {
+        try {
+            log.info("ReviewController find by home id Reviews(id: {}) start", id);
+            return reviewService.findbyHomeId(id);
+        } catch (Exception e) {
+            log.error("ReviewController find by home id Reviews failure, error: {}", e.getMessage());
+            return null;
+        } finally {
+            log.info("ReviewController find by home id Reviews end");
+        }
+    }
+
+    @Override
+    @GetMapping("/v1/review/user/{id}")
+    public List<ReviewDto> findByUserId(@PathVariable Long id) {
+        try {
+            log.info("ReviewController find by user id Reviews(id: {}) start", id);
+            return reviewService.findByUserId(id);
+        } catch (Exception e) {
+            log.error("ReviewController find by user id Reviews failure, error: {}", e.getMessage());
+            return null;
+        } finally {
+            log.info("ReviewController find by user id Reviews end");
         }
     }
 }
