@@ -1,6 +1,6 @@
 package line2.line2_back4.review.controller;
 
-import line2.line2_back4.review.model.ReviewDto;
+import line2.line2_back4.review.model.Review;
 import line2.line2_back4.review.service.ReviewService;
 import line2.line2_back4.systemMessage.SystemMessage;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +20,10 @@ public class ReviewControllerImpl implements ReviewController {
 
     @Override
     @PostMapping("/v1/review")
-    public SystemMessage add(@RequestBody ReviewDto reviewDtoInput) {
+    public SystemMessage add(@RequestBody Review review) {
         try {
-            log.info("ReviewController add Review({}) start", reviewDtoInput);
-            return reviewService.add(reviewDtoInput);
+            log.info("ReviewController add Review({}) start", review);
+            return reviewService.add(review);
         } catch (Exception e) {
             log.error("ReviewController add Review failure, error: {}", e.getMessage());
             return SystemMessage.builder()
@@ -37,10 +37,10 @@ public class ReviewControllerImpl implements ReviewController {
 
     @Override
     @PutMapping("/v1/review")
-    public SystemMessage edit(@RequestBody ReviewDto reviewDtoInput) {
+    public SystemMessage edit(@RequestBody Review review) {
         try {
-            log.info("ReviewController edit Review({}) start", reviewDtoInput);
-            return reviewService.edit(reviewDtoInput);
+            log.info("ReviewController edit Review({}) start", review);
+            return reviewService.edit(review);
         } catch (Exception e) {
             log.error("ReviewController edit Review failure, error: {}", e.getMessage());
             return SystemMessage.builder()
@@ -71,7 +71,7 @@ public class ReviewControllerImpl implements ReviewController {
 
     @Override
     @GetMapping("/v1/review/home/{id}")
-    public List<ReviewDto> findbyHomeId(@PathVariable Long id) {
+    public List<Review> findbyHomeId(@PathVariable Long id) {
         try {
             log.info("ReviewController find by home id Reviews(id: {}) start", id);
             return reviewService.findbyHomeId(id);
@@ -85,7 +85,7 @@ public class ReviewControllerImpl implements ReviewController {
 
     @Override
     @GetMapping("/v1/review/user/{id}")
-    public List<ReviewDto> findByUserId(@PathVariable Long id) {
+    public List<Review> findByUserId(@PathVariable Long id) {
         try {
             log.info("ReviewController find by user id Reviews(id: {}) start", id);
             return reviewService.findByUserId(id);
