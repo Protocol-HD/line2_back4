@@ -18,6 +18,8 @@ public class Review extends BaseTime {
     private Long id;
     private String review;
     private int star;
+    private String homeName;
     private Long homeId;
     private Long userId;
+    private Long reservationId;
 }
